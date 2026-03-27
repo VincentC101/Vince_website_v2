@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vince!</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: rgb(218, 67, 53)
+    }
+    .title {
+        text-align: center;
+        font-size: 128px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content {
+        position: relative;
+        text-align: center;
+        font-size: 24px;
+        height: 80vh;
+    }
+
+    .content2 a {
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .shifty {
+        position: absolute;
+    }
+
+    .shifty a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+    }
+</style>
+<body>
+    <div class="title">
+        <p>clothing</p>
+    </div>
+    <div class="content2">
+        <a href="/"> back to home</a>
+    </div>
+    <div class="content">
+        <p>
+            things i enjoy
+        </p>
+        <div class = "shifty">
+            <a href="https://stagprovisions.com/collections/portuguese-flannel/products/embroidered-ramie-camp-shirt-blue" target="_blank">embroidered raime camp shirt</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://stagprovisions.com/collections/portuguese-flannel/products/cross-stitch-camp-shirt-ecru" target="_blank">cross stitch camp shirt</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://stagprovisions.com/collections/portuguese-flannel/products/grain-cotton-shirt-white" target="_blank">grain camp shirt</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://www.amazon.com/gp/product/B089W5X8D6/ref=ox_sc_act_title_3?smid=A24N4K11ZXPII7&psc=1" target="_blank">lyre</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://www.mrporter.com/en-us/mens/product/kardo/clothing/casual-shorts/olbia-straight-leg-cotton-drawstring-shorts/46376663163099389" target="_blank">kardo shorts</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://us.spierandmackay.com/product/natural-herringbone-neo-3-sportcoat-15925-sc-neo3" target="_blank">spier and mackay cream sport coat</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://us.spierandmackay.com/product/lt-gray-tropical-ellis-trousers-16189-tr-el01" target="_blank">spier and mackay tropical wool pants</a>
+        </div>
+        <div class = "shifty">
+            <a href="https://besnard.co/products/light-grey-single-pleat-flannel-trousers?variant=48770177892684" target="_blank">besnard grey pants</a>
+        </div>
+    </div>
+</body>
+<script>
+    const shifties = document.querySelectorAll('.shifty');
+    const parent = document.querySelector('.content');
+
+    const maxWidth = parent.clientWidth;
+    const maxHeight = parent.clientHeight;
+
+    shifties.forEach(el => {
+        const randomX = Math.random() * (maxWidth - 100);
+        const randomY = Math.random() * (maxHeight * 2);
+
+        el.style.left = randomX + "px";
+        el.style.top = randomY + "px";
+    });
+</script>
+</html>

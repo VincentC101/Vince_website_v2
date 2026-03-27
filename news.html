@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vince! News!</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 40px;
+  background: #f4f1ec;
+  font-family: "Times New Roman", Georgia, serif;
+  color: #111;
+}
+
+.paper {
+  max-width: 1100px;
+  margin: auto;
+  background: #fff;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+}
+
+.header {
+  text-align: center;
+  border-bottom: 4px double #000;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.header h1 {
+  font-size: 64px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.header .subheader a {
+  font-size: 16px;
+  color: rgb(55, 55, 55);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.header .subheader a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 42px;
+  margin: 40px 0 10px;
+  padding-bottom: 5px;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 20px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+  margin-top: 6px;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h3 a {
+  font-weight: bold;
+}
+
+.untitled {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.music-style {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.athletic-div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.untitled > div:first-child {
+  grid-column: span 2;
+}
+
+.untitled > div:first-child h3 {
+  font-size: 24px;
+}
+
+.untitled > div,
+.music-style > div,
+.athletic-div > div {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.footer {
+  border-top: 2px solid #000;
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .header h1 {
+    font-size: 42px;
+  }
+
+  .untitled > div:first-child {
+    grid-column: span 1;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="paper">
+
+  <div class="header">
+    <h1>Today's News</h1>
+    <div class="subheader">
+      <a href="/">HOME</a> •
+      <a href="/clothing">CLOTHING</a> •
+      <a href="/music">MUSIC</a> •
+      <a href="/news">NEWS</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <h1>Fresh From The Atlantic</h1>
+    <div id="atlantic" class="untitled"></div>
+
+    <h1>Sports!</h1>
+
+    <h2>SB Nation</h2>
+    <div id="sbnation" class="untitled"></div>
+
+    <h2>The Athletic</h2>
+    <div class="athletic-div">
+      <div>
+        <h3>Cleveland</h3>
+        <div id="athleticcleveland"></div>
+      </div>
+      <div>
+        <h3>Chicago</h3>
+        <div id="athleticchicago"></div>
+      </div>
+    </div>
+
+    <h1>Pitchfork's Music Recommendations</h1>
+
+    <h2>New Music</h2>
+    <div class="music-style" id="pitchforkalbum"></div>
+
+    <h2>Reissues</h2>
+    <div class="music-style" id="pitchforkrv"></div>
+
+  </div>
+
+  <div class="footer">
+    <p>© 2026 Today's News • Printed not at all anywhere</p>
+  </div>
+
+</div>
+
+<script>
+function extractImage(item) {
+  if (item.thumbnail) return item.thumbnail;
+  const match = item.description.match(/<img[^>]+src="([^">]+)"/);
+  return match ? match[1] : null;
+}
+
+async function fetchFeed(url, limit = 5) {
+  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+  const res = await fetch(api);
+  const data = await res.json();
+
+  return data.items.slice(0, limit).map(item => ({
+    title: item.title,
+    link: item.link,
+    date: item.pubDate.slice(0, 10),
+    summary: item.description,
+    img: extractImage(item)
+  }));
+}
+
+function renderArticles(containerId, articles) {
+  const container = document.getElementById(containerId);
+
+  container.innerHTML = articles.map(article => `
+    <div>
+      ${article.img ? `<img src="${article.img}" class="thumb">` : ""}
+      <h3>
+        <a href="${article.link}" target="_blank">${article.title}</a>
+      </h3>
+      <small>${article.date}</small>
+      ${containerId.includes('pitchfork') ? "" : `<p>${article.summary}</p>`}
+    </div>
+  `).join('');
+}
+
+async function init() {
+  const entries_atlantic = await fetchFeed(
+    "https://theatlantic.com/feed/category/one-story-read-today/",
+    5
+  );
+
+  const entries_sb = await fetchFeed(
+    "https://www.sbnation.com/rss/index.xml",
+    5
+  );
+
+  const entries_athletic_cle = await fetchFeed(
+    "https://www.nytimes.com/athletic/rss/cleveland/",
+    5
+  );
+
+  const entries_athletic_chi = await fetchFeed(
+    "https://www.nytimes.com/athletic/rss/chicago/",
+    5
+  );
+
+  const pitchfork_album = await fetchFeed(
+    "https://pitchfork.com/feed/reviews/best/albums/rss",
+    8
+  );
+
+  const pitchfork_revised = await fetchFeed(
+    "https://pitchfork.com/feed/reviews/best/reissues/rss",
+    4
+  );
+
+  renderArticles("atlantic", entries_atlantic);
+  renderArticles("sbnation", entries_sb);
+  renderArticles("athleticcleveland", entries_athletic_cle);
+  renderArticles("athleticchicago", entries_athletic_chi);
+  renderArticles("pitchforkalbum", pitchfork_album);
+  renderArticles("pitchforkrv", pitchfork_revised);
+}
+
+init();
+</script>
+</body>
+</html>
