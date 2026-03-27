@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vince!</title>
+</head>
+<style>
+    body {
+        font-family: Verdana, Tahoma, Arial, sans-serif;
+        font-size: 12px;
+        background-color: rgb(234, 234, 234);
+        margin: 0;
+    }
+    .banner {
+        background-color: rgb(0, 0, 255);
+        color: rgb(255, 255, 255);
+        text-align: left;
+        padding: 5px;
+        border-bottom: 3px solid black;
+    }
+    .banner h1 {
+        margin-bottom: 0;
+    }
+    .banner p {
+        margin-top: 6px;
+        font-size: 14px;
+        color: rgb(255, 216, 20);
+    }
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.88);
+        padding: 5px;
+        border-bottom: 1px solid black;
+    }
+    .navbar a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        padding: 5px 30px;
+        font-weight: bold;
+    }
+    .navbar a:hover {
+        color:rgb(255, 216, 20);
+        text-decoration: underline;
+    }
+    .content {
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        margin: 50px 200px;
+        
+        border: 1px solid black;
+    }
+    .content2 {
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        margin: 20px;
+        border: 1px solid black;
+    }
+    .content2 h2 {
+        margin-top: 0;
+        border-bottom: 1px solid black;
+        padding: 5px;
+        background-color: rgb(0, 0, 255);
+        color: white;
+        font-size: 16px;
+    }
+    .content2 p {
+        padding: 8px;
+        margin: 0;
+        font-size: 14px;
+    }
+    .sidebar {
+      border: 1px solid black;
+      padding: 10px;
+      background-color: rgb(255, 255, 255);
+
+    }
+    .sidebar h2 {
+      margin-top: 0;
+      border-bottom: 1px solid black;
+      padding: 5px;
+      background-color: rgb(0, 0, 255);
+      color: white;
+      font-size: 16px;
+    }
+    .sidebar p {
+      padding: 8px;
+      margin: 0;
+      font-size: 14px;
+    }
+    .main {
+      display: flex;
+    }
+    .left {
+      flex: 3;
+      min-width: 300px;
+    }
+    .sidebar {      
+      flex: 1;
+      min-width: 200px;
+      max-height: fit-content;
+    }
+    .vertical_line {
+      border-left: 1px solid black;
+      margin-right: 20px;
+
+    }
+
+</style>
+
+<body>
+    <div class="banner">
+        <h1>Welcome to My Website!</h1>
+        <p>something without meaning</p>
+    </div>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Music</a>
+        <a href="news.html">News</a>
+        <a href="clothing.html">Clothes</a>
+    </div>
+    <tr>
+    <div class="content">
+    <div class="main">
+        <div class="left">
+            <div class="content2">
+                <h2>Welcome to Vincent's Website!</h2>
+                <p> Hey, I'm a student currently at the University of Chicago studying Computer Science and History. 
+                    I quite like clothes, making and listening to music, and keeping up with the news (mainly whatever 
+                    The Atlantic has to offer and sports), so I thought it'd be fun to include such things in a website.
+                </p>
+                <p>
+                    The home tab (this one) contains information about me and my interests. 
+                </p>
+                <p>
+                    The music tab will/does contain sheet music (hopefully) organized by genre and instrument, but idk.
+                </p>
+                <p>
+                    The news tab pulls from The Atlantic, sports sites, pitchfork, and bon appetit to form a nice lil newspaper.
+                </p>
+                <p>
+                    The clothes tab is updated incredibly sparsely and contains some of my favorite outfits and pieces that I have or want to buy.
+                </p>
+            </div>
+            <div class="content2">
+                <h2>Github</h2>
+                <p>
+                    You can find my Github profile <a href="https://github.com/vincentc101" target="_blank">here</a>.
+                </p>
+            </div>
+            <div class="content2">
+                <h2>Contact Me!</h2>
+                <p>
+                    If you want to contact me, you can email me at <a href="mailto: vtcrenshaw@uchicago.edu">vtcrenshaw@uchicago.edu</a>
+                </p>
+            </div>
+        </div>
+        <div class="vertical_line"></div>
+        <div class="sidebar">
+            <h2>Other Such Links</h2>
+            <p>I'm attaching a link to my youtube channel <a href="https://www.youtube.com/channel/UCOlS6fZAJpnx8MgbAGO1ONw" target="_blank">here</a> for some reason. 
+            I don't post videos lol. 
+            </p>
+            <p>
+            I also have a Rate Your Music profile where albums I like and dislike go. You can find it <a href="https://rateyourmusic.com/~vmsthunder" target="_blank">here</a>.
+            </p>
+        </div>
+    </div>    
+    </div>
+    </tr>
+         
+</body>
+</html>
